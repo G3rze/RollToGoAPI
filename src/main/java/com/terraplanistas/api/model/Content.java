@@ -50,7 +50,7 @@ public class Content {
     @OneToMany(mappedBy = "content")
     private List<GrantOptionSet> grantOptionSets;
 
-    @OneToMany(mappedBy = "content")
+    @OneToMany(mappedBy = "grantedContent")
     private List<GrantOptionItem> grantOptionItems;
 
 }

@@ -4,14 +4,14 @@ import java.io.Serializable;
 import java.util.UUID;
 
 public class RoomParticipantId implements Serializable {
-    private UUID roomId;
-    private String userId;
+    private UUID room;
+    private String user;
 
     public RoomParticipantId() {}
 
-    public RoomParticipantId(UUID roomId, String userId) {
-        this.roomId = roomId;
-        this.userId = userId;
+    public RoomParticipantId(UUID room, String user) {
+        this.room = room;
+        this.user = user;
     }
 
     @Override
@@ -19,11 +19,11 @@ public class RoomParticipantId implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RoomParticipantId that = (RoomParticipantId) o;
-        return roomId.equals(that.roomId) && userId.equals(that.userId);
+        return room.equals(that.room) && user.equals(that.user);
     }
 
     @Override
     public int hashCode() {
-        return java.util.Objects.hash(roomId, userId);
+        return java.util.Objects.hash(room, user);
     }
 }

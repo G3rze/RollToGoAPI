@@ -15,7 +15,7 @@ import java.util.UUID;
 public class Grant {
     @Id
     @GeneratedValue
-    @Column(, columnDefinition = "uuid", updatable = false, nullable = false)
+    @Column(columnDefinition = "uuid", updatable = false, nullable = false)
     private UUID id;
 
     @Column(name = "granter_type", nullable = false)

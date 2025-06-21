@@ -4,14 +4,14 @@ import java.io.Serializable;
 import java.util.UUID;
 
 public class GrantOptionItemId implements Serializable {
-    private UUID granterOptionSetId;
-    private UUID grantedContentId;
+    private UUID granterOptionSet;
+    private UUID grantedContent;
 
     public GrantOptionItemId() {}
 
-    public GrantOptionItemId(UUID granterOptionSetId, UUID grantedContentId) {
-        this.granterOptionSetId = granterOptionSetId;
-        this.grantedContentId = grantedContentId;
+    public GrantOptionItemId(UUID granterOptionSet, UUID grantedContent) {
+        this.granterOptionSet = granterOptionSet;
+        this.grantedContent = grantedContent;
     }
 
     @Override
@@ -19,12 +19,12 @@ public class GrantOptionItemId implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GrantOptionItemId that = (GrantOptionItemId) o;
-        return granterOptionSetId.equals(that.granterOptionSetId);
+        return granterOptionSet.equals(that.granterOptionSet);
     }
 
     @Override
     public int hashCode() {
-        return java.util.Objects.hash(granterOptionSetId, grantedContentId);
+        return java.util.Objects.hash(granterOptionSet, grantedContent);
     }
 
 }
