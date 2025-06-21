@@ -1,20 +1,24 @@
 package com.terraplanistas.api.model;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.util.List;
+import java.util.UUID;
 
 @Entity
-@Table(name = "rooms")
+@Table(name = "feats")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Room {
-
+public class Feat {
     @Id
+    @Column(columnDefinition = "uuid", updatable = false, nullable = false)
+    private UUID id;
+
     @OneToOne
     @MapsId
     @JoinColumn(name = "id")
@@ -25,7 +29,4 @@ public class Room {
 
     @Column(name = "description")
     private String description;
-
-    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<RoomParticipant> roomParticipants;
 }

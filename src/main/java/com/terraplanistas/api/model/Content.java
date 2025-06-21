@@ -1,40 +1,56 @@
 package com.terraplanistas.api.model;
 
-import lombok.*;
+import com.terraplanistas.api.model.enums.SourceContentEnum;
+import com.terraplanistas.api.model.enums.VisibilityEnum;
+
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
+import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.UUID;
+
 
 @Entity
 @Table(name = "content")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Content {
     @Id
     @GeneratedValue
+    @Column(columnDefinition = "uuid", updatable = false, nullable = false)
     private UUID id;
 
-    @Column(nullable = false, length = 20)
-    private String type;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "source_content_enum", nullable = false)
+    private SourceContentEnum sourceContentEnum;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "visibility_enum", nullable = false)
+    private VisibilityEnum visibilityEnum = VisibilityEnum.PUBLIC;
+
+    @Column(name = "created_at")
+    private OffsetDateTime createdAt;
 
     @ManyToOne
-    @JoinColumn(name = "original_owner_id", nullable = false)
-    private User originalOwner;
+    @JoinColumn(name = "author_id")
+    private User author;
 
-    @ManyToOne
-    @JoinColumn(name = "current_owner_id", nullable = false)
-    private User currentOwner;
+    @OneToMany(mappedBy = "grantedContent")
+    private List<Grant> grants;
 
-    @Column(columnDefinition = "jsonb", nullable = false)
-    private String data;
+    @OneToMany(mappedBy = "granterContent")
+    private List<Grant> grantedBy;
 
-    @Column(name = "is_homebrew", nullable = false)
-    private boolean isHomebrew;
+    @OneToMany(mappedBy = "content")
+    private List<GrantOptionSet> grantOptionSets;
 
-    @Column(columnDefinition = "jsonb", nullable = false)
-    private String dependencies;
+    @OneToMany(mappedBy = "content")
+    private List<GrantOptionItem> grantOptionItems;
 
-    @Column(nullable = false)
-    private boolean visibility = false;
 }

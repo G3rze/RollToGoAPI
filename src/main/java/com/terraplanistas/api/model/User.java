@@ -1,27 +1,40 @@
 package com.terraplanistas.api.model;
 
-import lombok.*;
 import jakarta.persistence.*;
-import java.util.UUID;
-import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.time.OffsetDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class User {
     @Id
-    @GeneratedValue
-    private UUID id;
+    @Column(columnDefinition = "uuid", updatable = false, nullable = false)
+    private String id;
 
-    @Column(name = "firebase_uid", unique = true, nullable = false)
-    private String firebaseUid;
+    @Column(name = "user_image_url")
+    private String userImageUrl;
 
-    @Column(unique = true, nullable = false, length = 50)
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
+
     @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    private OffsetDateTime createdAt;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Content> contents;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RoomParticipant> roomParticipants;
 }
