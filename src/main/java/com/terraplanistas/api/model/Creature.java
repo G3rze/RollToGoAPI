@@ -61,5 +61,5 @@ public class Creature {
     private List<Monster> monsters;
 
     @OneToMany(mappedBy = "creature", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Invocations> invocations;
+    private List<Invocation> invocations;
 }

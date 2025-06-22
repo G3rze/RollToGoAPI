@@ -14,7 +14,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Backgrounds {
+public class Background {
     @Id
     @Column(columnDefinition = "uuid", updatable = false, nullable = false)
     private UUID id;

@@ -10,7 +10,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Invocations {
+public class Invocation {
     @Id
     @OneToOne
     @MapsId
