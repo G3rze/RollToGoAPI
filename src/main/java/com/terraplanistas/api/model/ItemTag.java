@@ -16,8 +16,12 @@ import java.util.UUID;
 @AllArgsConstructor
 public class ItemTag {
     @Id
+    @Column(columnDefinition = "uuid", updatable = false, nullable = false)
+    private UUID id;
+
     @ManyToOne
-    @JoinColumn(name = "id", columnDefinition = "uuid", updatable = false, nullable = false)
+    @MapsId
+    @JoinColumn(name = "id")
     private Item item;
 
     @Column(name = "tag", nullable = false)

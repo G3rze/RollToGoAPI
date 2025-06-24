@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "rooms")
@@ -15,6 +16,9 @@ import java.util.List;
 public class Room {
 
     @Id
+    @Column(columnDefinition = "uuid", updatable = false, nullable = false)
+    private UUID id;
+
     @OneToOne
     @MapsId
     @JoinColumn(name = "id")

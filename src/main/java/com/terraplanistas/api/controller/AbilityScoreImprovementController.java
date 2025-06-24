@@ -26,12 +26,12 @@ public class AbilityScoreImprovementController{
     }
 
     @PutMapping
-    public AbilityScoreImprovement update(AbilityScoreImprovement abilityScoreImprovement) {
+    public AbilityScoreImprovement update(@RequestBody AbilityScoreImprovement abilityScoreImprovement) {
         return abilityScoreImprovementService.update(abilityScoreImprovement);
     }
 
     @PostMapping
-    public AbilityScoreImprovement save(AbilityScoreImprovement abilityScoreImprovement) {
+    public AbilityScoreImprovement save(@RequestBody AbilityScoreImprovement abilityScoreImprovement) {
         return abilityScoreImprovementService.save(abilityScoreImprovement);
     }
 

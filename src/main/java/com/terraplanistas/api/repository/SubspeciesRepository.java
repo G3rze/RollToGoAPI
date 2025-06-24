@@ -1,8 +1,9 @@
 package com.terraplanistas.api.repository;
 
+import com.terraplanistas.api.model.Subspecies;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
 
-public interface SubspeciesRepository extends JpaRepository<SubspeciesRepository, UUID> {
+public interface SubspeciesRepository extends JpaRepository<Subspecies, UUID> {
 }

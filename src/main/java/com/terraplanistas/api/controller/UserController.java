@@ -30,13 +30,13 @@ public class UserController {
         return userService.update(User);
     }
 
+    @OwnerCheck
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable String id) {
         userService.deleteById(id);
     }
 
-
-    @OwnerCheck(idParam = "id")
+    @GetMapping("/{id}")
     public User getUserById(@PathVariable String id) {
         return userService.findById(id);
     }

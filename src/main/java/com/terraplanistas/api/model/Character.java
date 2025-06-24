@@ -3,6 +3,8 @@ package com.terraplanistas.api.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.UUID;
+
 
 @Entity
 @Table(name = "characters")
@@ -12,9 +14,12 @@ import lombok.*;
 @AllArgsConstructor
 public class Character {
     @Id
+    @Column(columnDefinition = "uuid", updatable = false, nullable = false)
+    private UUID id;
+
     @OneToOne
     @MapsId
-    @JoinColumn(name = "id", columnDefinition = "uuid", updatable = false, nullable = false)
+    @JoinColumn(name = "id")
     private Creature creature;
 
     @Column(name = "race")

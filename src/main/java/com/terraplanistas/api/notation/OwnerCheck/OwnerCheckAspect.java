@@ -1,53 +1,68 @@
 package com.terraplanistas.api.notation.OwnerCheck;
 
-import com.google.firebase.auth.FirebaseToken;
-import com.terraplanistas.api.service.ResourceOwnerService;
-import jakarta.servlet.http.HttpServletRequest;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.util.UUID;
+import java.nio.file.AccessDeniedException;
 
 @Aspect
 @Component
 public class OwnerCheckAspect {
 
-    @Autowired
-    private ResourceOwnerService resourceOwnerService;
+    /**
+     * Define un "pointcut" que captura todas las ejecuciones de métodos
+     * anotados con @OwnerCheck.
+     */
+    @Pointcut("@annotation(com.terraplanistas.api.notation.OwnerCheck)")
+    public void ownerCheckPointcut() {
+    }
 
-    @Around("@annotation(ownerCheck)")
-    public Object verificarPropietario(ProceedingJoinPoint joinPoint, OwnerCheck ownerCheck) throws Throwable {
-        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-        HttpServletRequest request = attr.getRequest();
-        FirebaseToken user = (FirebaseToken) request.getAttribute("firebaseUser");
+    /**
+     * Este método se ejecutará "Antes" (@Before) de cualquier método
+     * que coincida con nuestro pointcut.
+     *
+     * @param joinPoint Contiene la información sobre el método interceptado.
+     * @throws AccessDeniedException si la validación de propietario falla.
+     */
+    @Before("ownerCheckPointcut()")
+    public void checkOwnership(JoinPoint joinPoint) throws AccessDeniedException {
+        // 1. Obtener el UID del usuario autenticado desde el token (Contexto de Seguridad)
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !authentication.isAuthenticated()) {
+            throw new AccessDeniedException("No hay un usuario autenticado para realizar la verificación.");
+        }
+        // Asumimos que el "name" de la autenticación es el UID de Firebase/JWT
+        String authenticatedUserId = authentication.getName();
 
-        String uid = user.getUid();
-
-        // Obtener el ID del recurso del parámetro del método
-        Object[] args = joinPoint.getArgs();
-        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        String[] paramNames = signature.getParameterNames();
-
-        UUID id = null;
-        for (int i = 0; i < paramNames.length; i++) {
-            if (paramNames[i].equals(ownerCheck.idParam())) {
-                id = UUID.fromString(args[i].toString());
+        // 2. Obtener el ID del usuario que se envió en la petición
+        // Buscamos en los argumentos del método un parámetro de tipo String que será el ID.
+        String requestUserId = null;
+        for (Object arg : joinPoint.getArgs()) {
+            if (arg instanceof String) {
+                // Aquí asumimos que el primer String que encontramos es el ID del usuario.
+                // Esto se puede hacer más robusto si es necesario.
+                requestUserId = (String) arg;
                 break;
             }
+            // Podrías añadir más checks, por ejemplo si el ID fuera UUID
+            // if (arg instanceof java.util.UUID) { ... }
         }
 
-        if (id == null || !resourceOwnerService.isOwner(id, uid)) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "No eres el propietario del recurso");
+        if (requestUserId == null) {
+            throw new IllegalArgumentException("No se encontró un ID de usuario en los parámetros del método para la validación de propietario.");
         }
 
-        return joinPoint.proceed();
+        // 3. Comparar ambos IDs
+        if (!authenticatedUserId.equals(requestUserId)) {
+            // Si no coinciden, lanzamos una excepción. Spring la convertirá en un 403 Forbidden.
+            throw new AccessDeniedException("Acceso denegado. No tienes permiso para modificar este recurso.");
+        }
+
+        // Si todo está bien, el método original continúa su ejecución.
     }
 }

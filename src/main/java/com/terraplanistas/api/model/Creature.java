@@ -54,12 +54,12 @@ public class Creature {
     @Enumerated(EnumType.STRING)
     private CreatureSourceType creatureSourceType;
 
-    @OneToMany(mappedBy = "creature", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Character> characters;
+    @OneToOne(mappedBy = "creature", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Monster monsters;
 
-    @OneToMany(mappedBy = "creature", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Monster> monsters;
+    @OneToOne(mappedBy = "creature", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Invocation invocations;
 
-    @OneToMany(mappedBy = "creature", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Invocation> invocations;
+    @OneToOne(mappedBy = "creature", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private Character character;
 }

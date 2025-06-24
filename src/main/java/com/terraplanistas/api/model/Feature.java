@@ -17,9 +17,12 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Feature {
     @Id
+    @Column(columnDefinition = "uuid", updatable = false, nullable = false)
+    private UUID id;
+
     @OneToOne
     @MapsId
-    @JoinColumn(name = "id", columnDefinition = "uuid", updatable = false, nullable = false)
+    @JoinColumn(name = "id")
     private Content content;
 
     @Column(name = "name", nullable = false)
