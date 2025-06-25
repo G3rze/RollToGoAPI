@@ -1,25 +1,21 @@
 package com.terraplanistas.api.controller.DTO;
 
-
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.UUID;
-
 @Getter
 @AllArgsConstructor
-@Setter
 @NoArgsConstructor
-public class RoomCreateDTO {
-    @NotBlank(message = "contentId es requerido")
+@Setter
+public class BackgroundCreateDTO {
+    @NotBlank(message = "Content ID no puede ser vacío")
     private String contentId;
 
-    @NotBlank(message = "name no puede estar vacío")
+    @NotBlank(message = "Nombre no peude ser vacío")
     private String name;
 
     private String description;
-
 }

@@ -43,5 +43,4 @@ public class Effect {
     @Enumerated(EnumType.STRING)
     private DurationUnitEnum durationUnit;
 
-
 }
