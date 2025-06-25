@@ -1,8 +1,11 @@
 package com.terraplanistas.api.controller;
 
+import com.terraplanistas.api.controller.DTO.AbilityCreateDTO;
 import com.terraplanistas.api.model.Ability;
 import com.terraplanistas.api.service.AbilityService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,8 +29,23 @@ public class AbilityController {
     }
 
     @PostMapping
-    public Ability createAbility(@RequestBody Ability ability) {
-        return abilityService.save(ability);
+    public ResponseEntity<?> createAbility(@RequestBody AbilityCreateDTO abilityDTO){
+        if (abilityDTO.getContentId() == null) {
+            return ResponseEntity.badRequest().body("contentId es requerido");
+        }
+
+        Ability ability = new Ability();
+        ability.setAbilityTypeEnum(abilityDTO.getAbilityTypeEnum());
+        ability.setModifier(abilityDTO.getModifier());
+        ability.setValue(abilityDTO.getValue());
+
+        try {
+            Ability savedAbility = abilityService.save(ability);
+            return ResponseEntity.ok(savedAbility);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError()
+                    .body("Error al crear la ability: " + e.getMessage());
+        }
     }
 
     @PutMapping

@@ -1,6 +1,7 @@
 package com.terraplanistas.api.service;
 
 import com.terraplanistas.api.model.Content;
+import com.terraplanistas.api.model.enums.SourceContentEnum;
 import com.terraplanistas.api.repository.ContentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

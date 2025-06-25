@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/content")
+@RequestMapping("api/content")
 public class ContentController {
 
     @Autowired
@@ -40,6 +40,5 @@ public class ContentController {
     public void deleteById(@PathVariable UUID id) {
         contentService.deleteById(id);
     }
-
 
 }
