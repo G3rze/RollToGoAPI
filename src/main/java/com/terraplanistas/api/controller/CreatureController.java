@@ -1,8 +1,14 @@
 package com.terraplanistas.api.controller;
 
+import com.terraplanistas.api.controller.DTO.CreatureCreateDTO;
+import com.terraplanistas.api.model.Content;
 import com.terraplanistas.api.model.Creature;
+import com.terraplanistas.api.service.ContentService;
 import com.terraplanistas.api.service.CreatureService;
+import jakarta.validation.Valid;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +20,8 @@ public class CreatureController {
 
     @Autowired
     private CreatureService creatureService;
+    @Autowired
+    private ContentService contentService;
 
     @GetMapping
     public List<Creature> findAll() {
@@ -26,8 +34,31 @@ public class CreatureController {
     }
 
     @PostMapping
-    public Creature save(@RequestBody Creature creature) {
-        return creatureService.save(creature);
+    public ResponseEntity<?> save(@Valid @RequestBody CreatureCreateDTO creatureCreateDTO) {
+        Content content;
+        try {
+            content = contentService.findById(UUID.fromString(creatureCreateDTO.getContentId()));
+            if (content == null) {return ResponseEntity.notFound().build();}
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("error encontrando content " + e.getMessage());
+        }
+
+        Creature creature = new Creature();
+        creature.setName(creatureCreateDTO.getName());
+        creature.setAlignmentEnum(creatureCreateDTO.getAlignmentEnum());
+        creature.setCreatureSourceType(creatureCreateDTO.getCreatureSourceType());
+        creature.setBaseAc(creatureCreateDTO.getBaseAc());
+        creature.setBaseHp(creatureCreateDTO.getBaseHp());
+        creature.setSizeEnum(creatureCreateDTO.getSizeEnum());
+        creature.setTypeEnum(creatureCreateDTO.getTypeEnum());
+        creature.setContent(content);
+
+        try {
+            creatureService.save(creature);
+            return ResponseEntity.ok().body(creature);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("error guardando creature " + e.getMessage());
+        }
     }
 
     @PutMapping

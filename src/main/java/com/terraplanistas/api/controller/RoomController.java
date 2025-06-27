@@ -42,7 +42,7 @@ public class RoomController {
             return ResponseEntity.badRequest().body("contentId es requerido");
         }
 
-        Optional<Content> content = Optional.ofNullable(contentService.findById(roomDTO.getContentId()));
+        Optional<Content> content = Optional.ofNullable(contentService.findById(UUID.fromString(roomDTO.getContentId())));
         if (content.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Content no encontrado con ID: " + roomDTO.getContentId());

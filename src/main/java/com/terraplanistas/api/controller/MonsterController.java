@@ -1,8 +1,14 @@
 package com.terraplanistas.api.controller;
 
+import com.terraplanistas.api.controller.DTO.MonsterCreateDTO;
+import com.terraplanistas.api.model.Creature;
 import com.terraplanistas.api.model.Monster;
+import com.terraplanistas.api.service.CreatureService;
 import com.terraplanistas.api.service.MonsterService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,9 +31,36 @@ public class MonsterController {
         return monsterService.findById(id);
     }
 
+    @Autowired
+    private CreatureService creatureService; // Necesitas inyectar CreatureService para buscar la Creature
+
     @PostMapping
-    public Monster save(@RequestBody Monster monster) {
-        return monsterService.save(monster);
+    public ResponseEntity<?> save(@Valid @RequestBody MonsterCreateDTO monsterCreateDTO) {
+        Creature creature;
+        try {
+            UUID creatureUuid = UUID.fromString(monsterCreateDTO.getCreatureId());
+            creature = creatureService.findById(creatureUuid);
+            if (creature == null) {
+                return ResponseEntity.badRequest().body("La criatura con ID " + monsterCreateDTO.getCreatureId() + " no existe.");
+            }
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body("El ID de criatura proporcionado no es un formato UUID válido: " + e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Error al encontrar la criatura: " + e.getMessage());
+        }
+
+        Monster monster = new Monster();
+        monster.setCreature(creature);
+        monster.setChallengeRating(monsterCreateDTO.getChallengeRating());
+        monster.setLegendary(monsterCreateDTO.getLegendary());
+        monster.setLair(monsterCreateDTO.getLair());
+
+        try {
+            Monster savedMonster = monsterService.save(monster);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedMonster);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Error al guardar el monstruo: " + e.getMessage());
+        }
     }
 
     @PutMapping

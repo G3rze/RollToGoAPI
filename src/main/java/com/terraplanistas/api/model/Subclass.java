@@ -28,7 +28,6 @@ public class Subclass {
     private UUID classId;
 
     @ManyToOne
-    @MapsId
     @JoinColumn(name = "class_id", referencedColumnName = "id")
     private Class clazz;
 

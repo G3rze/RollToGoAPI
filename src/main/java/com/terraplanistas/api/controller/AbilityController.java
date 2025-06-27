@@ -3,6 +3,7 @@ package com.terraplanistas.api.controller;
 import com.terraplanistas.api.controller.DTO.AbilityCreateDTO;
 import com.terraplanistas.api.model.Ability;
 import com.terraplanistas.api.service.AbilityService;
+import jakarta.validation.Valid;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,7 @@ public class AbilityController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createAbility(@RequestBody AbilityCreateDTO abilityDTO){
+    public ResponseEntity<?> createAbility(@Valid @RequestBody AbilityCreateDTO abilityDTO){
         if (abilityDTO.getContentId() == null) {
             return ResponseEntity.badRequest().body("contentId es requerido");
         }

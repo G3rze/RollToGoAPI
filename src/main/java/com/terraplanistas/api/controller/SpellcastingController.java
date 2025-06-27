@@ -1,8 +1,14 @@
 package com.terraplanistas.api.controller;
 
+import com.terraplanistas.api.controller.DTO.SpellcastingCreateDTO;
+import com.terraplanistas.api.model.Class;
 import com.terraplanistas.api.model.Spellcasting;
+import com.terraplanistas.api.service.ClassService;
 import com.terraplanistas.api.service.SpellcastingService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,9 +31,33 @@ public class SpellcastingController {
         return spellcastingService.findById(id);
     }
 
+    @Autowired
+    private ClassService classService;
+
     @PostMapping
-    public Spellcasting save(@RequestBody Spellcasting spellcasting) {
-        return spellcastingService.save(spellcasting);
+    public ResponseEntity<?> save(@Valid @RequestBody SpellcastingCreateDTO spellcastingCreateDTO) {
+        Class clazz;
+        try {
+            clazz = classService.findById(spellcastingCreateDTO.getClassId());
+            if (clazz == null) {
+                return ResponseEntity.badRequest().body("La clase con ID " + spellcastingCreateDTO.getClassId() + " no existe.");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Error al encontrar la clase: " + e.getMessage());
+        }
+
+        Spellcasting spellcasting = new Spellcasting();
+        spellcasting.setClazz(clazz);
+        spellcasting.setSpellcastingProgressionEnum(spellcastingCreateDTO.getSpellcastingProgressionEnum());
+        spellcasting.setSpellcastingAbility(spellcastingCreateDTO.getSpellcastingAbility());
+        spellcasting.setPreparationFormula(spellcastingCreateDTO.getPreparationFormula());
+
+        try {
+            Spellcasting savedSpellcasting = spellcastingService.save(spellcasting);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedSpellcasting);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Error al guardar el lanzamiento de conjuros: " + e.getMessage());
+        }
     }
 
     @PutMapping

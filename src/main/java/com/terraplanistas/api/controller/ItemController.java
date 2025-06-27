@@ -1,8 +1,14 @@
 package com.terraplanistas.api.controller;
 
+import com.terraplanistas.api.controller.DTO.ItemCreateDTO;
+import com.terraplanistas.api.model.Content;
 import com.terraplanistas.api.model.Item;
 import com.terraplanistas.api.repository.ItemRepository;
+import com.terraplanistas.api.service.ContentService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,9 +31,43 @@ public class ItemController {
         return itemRepository.findById(id).orElse(null);
     }
 
+    @Autowired
+    private ContentService contentService;
+
     @PostMapping
-    public Item save(@RequestBody Item item) {
-        return itemRepository.save(item);
+    public ResponseEntity<?> save(@Valid @RequestBody ItemCreateDTO itemCreateDTO) {
+        Content content;
+        try {
+            UUID contentUuid = UUID.fromString(itemCreateDTO.getContentId());
+            content = contentService.findById(contentUuid);
+
+            if (content == null) {
+                return ResponseEntity.badRequest().body("El contenido con ID " + itemCreateDTO.getContentId() + " no existe.");
+            }
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body("El ID de contenido proporcionado no es un formato UUID válido: " + e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Error al encontrar el contenido: " + e.getMessage());
+        }
+
+        Item item = new Item();
+        item.setContent(content);
+        item.setName(itemCreateDTO.getName());
+        item.setDescription(itemCreateDTO.getDescription());
+        item.setItemTypeEnum(itemCreateDTO.getItemTypeEnum());
+        item.setRarityEnum(itemCreateDTO.getRarityEnum());
+        item.setWeight(itemCreateDTO.getWeight());
+        item.setCostValue(itemCreateDTO.getCostValue());
+        item.setCostCurrency(itemCreateDTO.getCostCurrency());
+        item.setAttunementRequired(itemCreateDTO.getAttunementRequired());
+        item.setIsMagic(itemCreateDTO.getIsMagic());
+
+        try {
+            Item savedItem = itemRepository.save(item);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedItem);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Error al guardar el ítem: " + e.getMessage());
+        }
     }
 
     @PutMapping
