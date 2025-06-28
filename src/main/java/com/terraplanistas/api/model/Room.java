@@ -24,6 +24,9 @@ public class Room {
     @JoinColumn(name = "id")
     private Content content;
 
+    @Version
+    private Long version;
+
     @Column(name = "name", nullable = false)
     private String name;
 

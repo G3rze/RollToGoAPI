@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/subclasses")
+@RequestMapping("api/subclasses")
 public class SubclassController {
 
     @Autowired
@@ -65,7 +65,6 @@ public class SubclassController {
         Subclass subclass = new Subclass();
         subclass.setContent(content);
         subclass.setClazz(clazz);
-        subclass.setClassId(clazz.getId());
         subclass.setName(subclassCreateDTO.getName());
         subclass.setDescription(subclassCreateDTO.getDescription());
 

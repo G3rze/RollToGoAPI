@@ -17,9 +17,9 @@ import java.util.UUID;
 public class ContentCreateDTO {
     @NotNull(message = "El tipo de contenido fuente no puede ser nulo")
     private SourceContentEnum sourceContentEnum;
-
     @NotNull(message = "La visibilidad no puede ser nula")
     private VisibilityEnum visibilityEnum;
     @NotNull(message = "El ID del autor no puede ser nulo")
     private String authorId;
+
 }

@@ -16,7 +16,7 @@ import java.util.UUID;
 @Setter
 public class SpellcastingCreateDTO {
     @NotNull(message = "El ID de la clase no puede ser nulo")
-    private UUID classId;
+    private String classId;
 
     @NotNull(message = "La progresión de lanzamiento de conjuros no puede ser nula")
     private SpellcastingProgressionEnum spellcastingProgressionEnum;

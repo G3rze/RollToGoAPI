@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-@Service
+@RestController
+@RequestMapping("api/skills")
 public class SkillController {
 
     @Autowired

@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/spellcasting")
+@RequestMapping("api/spellcasting")
 public class SpellcastingController {
 
     @Autowired
@@ -38,7 +38,7 @@ public class SpellcastingController {
     public ResponseEntity<?> save(@Valid @RequestBody SpellcastingCreateDTO spellcastingCreateDTO) {
         Class clazz;
         try {
-            clazz = classService.findById(spellcastingCreateDTO.getClassId());
+            clazz = classService.findById(UUID.fromString(spellcastingCreateDTO.getClassId()));
             if (clazz == null) {
                 return ResponseEntity.badRequest().body("La clase con ID " + spellcastingCreateDTO.getClassId() + " no existe.");
             }

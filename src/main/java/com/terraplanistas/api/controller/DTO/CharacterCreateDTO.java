@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,11 +17,8 @@ public class CharacterCreateDTO {
     @NotBlank(message = "El ID de criatura no puede estar vacío")
     private String creatureId;
 
-    @NotNull(message = "La raza no puede ser nula")
-    private Integer race;
-
     @NotNull(message = "La clase de personaje no puede ser nula")
-    private Integer characterClass;
+    private String characterClass;
 
     @NotBlank(message = "El nombre no puede estar vacío")
     private String name;

@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/backgrounds")
+@RequestMapping("api/backgrounds")
 public class BackgroundController {
 
     @Autowired

@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/level-progressions")
+@RequestMapping("api/level-progressions")
 public class LevelProgressionController {
 
     @Autowired

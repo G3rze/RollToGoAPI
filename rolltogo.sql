@@ -5,8 +5,6 @@ CREATE USER rollmaster WITH PASSWORD 'M3be$0(onM4r(o';
 
 DROP DATABASE rolltogo;
 
-comment on database postgres is 'default administrative connection database';
-
 CREATE DATABASE rolltogo
     WITH OWNER = rollmaster
     ENCODING = 'UTF8'
@@ -22,324 +20,321 @@ GRANT ALL PRIVILEGES ON DATABASE rolltogo TO rollmaster;
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TYPE source_content_enum AS ENUM (
-    'item',
-    'background',
-    'class',
-    'subclass',
-    'proficiencies',
-    'bonuses',
-    'abilities',
-    'skills',
-    'Creatures',
-    'spells',
-    'species',
-    'subspecies',
-    'feats',
-    'limited_usages',
-    'effects',
-    'actions',
-    'damages',
-    'senses',
-    'ability_score_improvement',
-    'movements',
-    'rooms'
-    );
+    'ITEM',
+    'BACKGROUND',
+    'CLASS',
+    'SUBCLASS',
+    'PROFICIENCIES',
+    'BONUSES',
+    'ABILITIES',
+    'SKILLS',
+    'CREATURES',
+    'SPELLS',
+    'SPECIES',
+    'SUBSPECIES',
+    'FEATS',
+    'LIMITED_USAGES',
+    'EFFECTS',
+    'ACTIONS',
+    'DAMAGES',
+    'SENSES',
+    'ABILITY_SCORE_IMPROVEMENT',
+    'MOVEMENTS',
+    'ROOMS'
+);
 
 CREATE TYPE visibility_enum AS ENUM (
-    'public',
-    'private',
-    'unlisted'
-    );
+    'PUBLIC',
+    'PRIVATE',
+    'UNLISTED'
+);
 
 CREATE TYPE item_type_enum AS ENUM (
-    'weapon',
-    'armor',
-    'accessory',
-    'consumable',
-    'tool',
-    'miscellaneous'
-    );
+    'WEAPON',
+    'ARMOR',
+    'ACCESSORY',
+    'CONSUMABLE',
+    'TOOL',
+    'MISCELLANEOUS'
+);
 
 CREATE TYPE rarity_enum AS ENUM (
-    'common',
-    'uncommon',
-    'rare',
-    'very_rare',
-    'legendary',
-    'artifact'
-    );
+    'COMMON',
+    'UNCOMMON',
+    'RARE',
+    'VERY_RARE',
+    'LEGENDARY',
+    'ARTIFACT'
+);
 
 CREATE TYPE currency_enum AS ENUM (
-    'copper',
-    'silver',
-    'gold',
-    'electrum',
-    'platinum'
-    );
+    'COPPER',
+    'SILVER',
+    'GOLD',
+    'ELECTRUM',
+    'PLATINUM'
+);
 
 CREATE TYPE item_modifier_type_enum AS ENUM (
-    'bonus',
-    'penalty',
-    'reduction',
-    'transformation'
-    );
+    'BONUS',
+    'PENALTY',
+    'REDUCTION',
+    'TRANSFORMATION'
+);
 
 CREATE TYPE cover_type_enum AS ENUM (
-    'none',
-    'half',
-    'three_quarters',
-    'full'
-    );
+    'NONE',
+    'HALF',
+    'THREE_QUARTERS',
+    'FULL'
+);
 
 CREATE TYPE spellcasting_progression_enum AS ENUM (
-    'full_caster',
-    'half_caster',
-    'third_caster',
-    'pact_magic',
-    'innate_magic'
-    );
+    'FULL_CASTER',
+    'HALF_CASTER',
+    'THIRD_CASTER',
+    'PACT_MAGIC',
+    'INNATE_MAGIC'
+);
 
 CREATE TYPE ability_type_enum AS ENUM (
-    'strength',
-    'dexterity',
-    'constitution',
-    'intelligence',
-    'wisdom',
-    'charisma',
-    'all'
-    );
+    'STRENGTH',
+    'DEXTERITY',
+    'CONSTITUTION',
+    'INTELLIGENCE',
+    'WISDOM',
+    'CHARISMA',
+    'ALL'
+);
 
 CREATE TYPE proficiency_type_enum AS ENUM (
-    'weapon',
-    'armor',
-    'tool',
-    'skill',
-    'saving_throw',
-    'language',
-    'other'
-    );
+    'WEAPON',
+    'ARMOR',
+    'TOOL',
+    'SKILL',
+    'SAVING_THROW',
+    'LANGUAGE',
+    'OTHER'
+);
 
 CREATE TYPE bonus_type_enum AS ENUM (
-    'attack_roll',
-    'damage_roll',
-    'saving_throw',
-    'ability_check',
-    'skill_check',
-    'spell_attack_bonus',
-    'initiative'
-    );
+    'ATTACK_ROLL',
+    'DAMAGE_ROLL',
+    'SAVING_THROW',
+    'ABILITY_CHECK',
+    'SKILL_CHECK',
+    'SPELL_ATTACK_BONUS',
+    'INITIATIVE'
+);
 
 CREATE TYPE skill_type_enum AS ENUM (
-    'acrobatics',
-    'animal_handling',
-    'arcana',
-    'athletics',
-    'deception',
-    'history',
-    'insight',
-    'intimidation',
-    'investigation',
-    'medicine',
-    'nature',
-    'perception',
-    'performance',
-    'persuasion',
-    'religion',
-    'sleight_of_hand',
-    'stealth',
-    'survival'
-    );
+    'ACROBATICS',
+    'ANIMAL_HANDLING',
+    'ARCANA',
+    'ATHLETICS',
+    'DECEPTION',
+    'HISTORY',
+    'INSIGHT',
+    'INTIMIDATION',
+    'INVESTIGATION',
+    'MEDICINE',
+    'NATURE',
+    'PERCEPTION',
+    'PERFORMANCE',
+    'PERSUASION',
+    'RELIGION',
+    'SLEIGHT_OF_HAND',
+    'STEALTH',
+    'SURVIVAL'
+);
 
 CREATE TYPE proficiency_level_enum AS ENUM (
-    'proficient',
-    'expertise',
-    'half_proficient',
-    'not_proficient'
-    );
+    'PROFICIENT',
+    'EXPERTISE',
+    'HALF_PROFICIENT',
+    'NOT_PROFICIENT'
+);
 
 CREATE TYPE creature_size_enum AS ENUM (
-    'tiny',
-    'small',
-    'medium',
-    'large',
-    'huge',
-    'gargantuan'
-    );
+    'TINY',
+    'SMALL',
+    'MEDIUM',
+    'LARGE',
+    'HUGE',
+    'GARGANTUAN'
+);
 
 CREATE TYPE creature_type_enum AS ENUM (
-    'aberration',
-    'beast',
-    'celestial',
-    'construct',
-    'dragon',
-    'elemental',
-    'fey',
-    'fiend',
-    'giant',
-    'humanoid',
-    'monstrosity',
-    'ooze',
-    'plant',
-    'undead',
-    'other'
-    );
+    'ABERRATION',
+    'BEAST',
+    'CELESTIAL',
+    'CONSTRUCT',
+    'DRAGON',
+    'ELEMENTAL',
+    'FEY',
+    'FIEND',
+    'GIANT',
+    'HUMANOID',
+    'MONSTROSITY',
+    'OOZE',
+    'PLANT',
+    'UNDEAD',
+    'OTHER'
+);
 
 CREATE TYPE alignment_enum AS ENUM (
-    'lawful_good',
-    'neutral_good',
-    'chaotic_good',
-    'lawful_neutral',
-    'true_neutral',
-    'chaotic_neutral',
-    'lawful_evil',
-    'neutral_evil',
-    'chaotic_evil'
-    );
+    'LAWFUL_GOOD',
+    'NEUTRAL_GOOD',
+    'CHAOTIC_GOOD',
+    'LAWFUL_NEUTRAL',
+    'TRUE_NEUTRAL',
+    'CHAOTIC_NEUTRAL',
+    'LAWFUL_EVIL',
+    'NEUTRAL_EVIL',
+    'CHAOTIC_EVIL'
+);
 
 CREATE TYPE creature_source_type AS ENUM (
-    'monster',
-    'character',
-    'invocation',
-    'vehicle'
-    );
+    'MONSTER',
+    'CHARACTER',
+    'INVOCATION',
+    'VEHICLE'
+);
 
 CREATE TYPE spell_level_enum AS ENUM (
-    'cantrip',
-    'first',
-    'second',
-    'third',
-    'fourth',
-    'fifth',
-    'sixth',
-    'seventh',
-    'eighth',
-    'ninth'
-    );
+    'CANTRIP',
+    'FIRST',
+    'SECOND',
+    'THIRD',
+    'FOURTH',
+    'FIFTH',
+    'SIXTH',
+    'SEVENTH',
+    'EIGHTH',
+    'NINTH'
+);
 
 CREATE TYPE spell_school_enum AS ENUM (
-    'abjuration',
-    'conjuration',
-    'divination',
-    'enchantment',
-    'evocation',
-    'illusion',
-    'necromancy',
-    'transmutation',
-    'universal'
-    );
+    'ABJURATION',
+    'CONJURATION',
+    'DIVINATION',
+    'ENCHANTMENT',
+    'EVOCATION',
+    'ILLUSION',
+    'NECROMANCY',
+    'TRANSMUTATION',
+    'UNIVERSAL'
+);
 
 CREATE TYPE casting_time_unit_enum AS ENUM (
-    'action',
-    'bonus action',
-    'reaction',
-    'minute',
-    'hour',
-    'day',
-    'turn'
-    );
+    'ACTION',
+    'BONUS ACTION',
+    'REACTION',
+    'MINUTE',
+    'HOUR',
+    'DAY',
+    'TURN'
+);
 
 CREATE TYPE range_unit_enum AS ENUM (
-    'feet',
-    'self',
-    'touch',
-    'miles',
-    'unlimited'
-    );
+    'FEET',
+    'SELF',
+    'TOUCH',
+    'MILES',
+    'UNLIMITED'
+);
 
 CREATE TYPE duration_unit_enum AS ENUM (
-    'rounds',
-    'minutes',
-    'hours',
-    'days',
-    'permanent',
-    'instantaneous'
-    );
+    'ROUNDS',
+    'MINUTES',
+    'HOURS',
+    'DAYS',
+    'PERMANENT',
+    'INSTANTANEOUS'
+);
 
 CREATE TYPE recovery_type_enum AS ENUM (
-    'short_rest',
-    'long_rest',
-    'daily',
-    'permanent',
-    'other'
-    );
+    'SHORT_REST',
+    'LONG_REST',
+    'DAILY',
+    'PERMANENT',
+    'OTHER'
+);
 
 CREATE TYPE condition_type_enum AS ENUM (
-    'blinded',
-    'charmed',
-    'deafened',
-    'frightened',
-    'grappled',
-    'incapacitated',
-    'invisible',
-    'paralyzed',
-    'petrified',
-    'poisoned',
-    'prone',
-    'restrained',
-    'stunned',
-    'unconscious',
-    'other'
-    );
+    'BLINDED',
+    'CHARMED',
+    'DEAFENED',
+    'FRIGHTENED',
+    'GRAPPLED',
+    'INCAPACITATED',
+    'INVISIBLE',
+    'PARALYZED',
+    'PETRIFIED',
+    'POISONED',
+    'PRONE',
+    'RESTRAINED',
+    'STUNNED',
+    'UNCONSCIOUS',
+    'OTHER'
+);
 
 CREATE TYPE action_type_enum AS ENUM (
-    'action',
-    'bonus_action',
-    'reaction',
-    'legendary_action',
-    'lair_action',
-    'mythic_action',
-    'special_action'
-    );
-
-
+    'ACTION',
+    'BONUS_ACTION',
+    'REACTION',
+    'LEGENDARY_ACTION',
+    'LAIR_ACTION',
+    'MYTHIC_ACTION',
+    'SPECIAL_ACTION'
+);
 
 CREATE TYPE damage_type_enum AS ENUM (
-    'acid',
-    'bludgeoning',
-    'cold',
-    'fire',
-    'force',
-    'lightning',
-    'necrotic',
-    'piercing',
-    'poison',
-    'psychic',
-    'radiant',
-    'slashing',
-    'thunder'
-    );
+    'ACID',
+    'BLUDGEONING',
+    'COLD',
+    'FIRE',
+    'FORCE',
+    'LIGHTNING',
+    'NECROTIC',
+    'PIERCING',
+    'POISON',
+    'PSYCHIC',
+    'RADIANT',
+    'SLASHING',
+    'THUNDER'
+);
 
 CREATE TYPE senses_type_enum AS ENUM (
-    'blindsight',
-    'darkvision',
-    'tremorsense',
-    'truesight',
-    'other'
-    );
+    'BLINDSIGHT',
+    'DARKVISION',
+    'TREMORSENSE',
+    'TRUESIGHT',
+    'OTHER'
+);
 
 CREATE TYPE movement_type_enum AS ENUM (
-    'walking',
-    'flying',
-    'swimming',
-    'climbing',
-    'burrowing',
-    'other'
-    );
+    'WALKING',
+    'FLYING',
+    'SWIMMING',
+    'CLIMBING',
+    'BURROWING',
+    'OTHER'
+);
 
 CREATE TYPE role_enum AS ENUM (
-    'dungeon_master',
-    'player'
-    );
+    'DUNGEON_MASTER',
+    'PLAYER'
+);
 
 CREATE TYPE level_progression_type_enum AS ENUM (
-    'class',
-    'subclass',
-    'feat',
-    'background',
-    'item',
-    'other'
-    );
-
+    'CLASS',
+    'SUBCLASS',
+    'FEAT',
+    'BACKGROUND',
+    'ITEM',
+    'OTHER'
+);
 
 
 CREATE TABLE IF NOT EXISTS users
@@ -355,7 +350,7 @@ CREATE TABLE IF NOT EXISTS content
 (
     id                  UUID PRIMARY KEY             DEFAULT uuid_generate_v4(),
     source_content_enum source_content_enum NOT NULL,
-    visibility_enum     visibility_enum     NOT NULL DEFAULT 'public',
+    visibility_enum     visibility_enum     NOT NULL DEFAULT 'PUBLIC',
     created_at          TIMESTAMP WITH TIME ZONE     DEFAULT CURRENT_TIMESTAMP,
     author_id           VARCHAR                NOT NULL REFERENCES users (id) ON DELETE CASCADE
 );
@@ -366,10 +361,10 @@ CREATE TABLE IF NOT EXISTS items
     name                 VARCHAR(255)   NOT NULL,
     description          TEXT,
     item_type_enum       item_type_enum NOT NULL,
-    rarity_enum          rarity_enum    NOT NULL DEFAULT 'common',
+    rarity_enum          rarity_enum    NOT NULL DEFAULT 'COMMON',
     weight               DECIMAL(10, 2)          DEFAULT 0.00,
     cost_value           DECIMAL(10, 2)          DEFAULT 0.00 NOT NULL,
-    cost_currency        currency_enum  NOT NULL DEFAULT 'gold',
+    cost_currency        currency_enum  NOT NULL DEFAULT 'GOLD',
     attuntement_required BOOLEAN                 DEFAULT FALSE,
     is_magic             BOOLEAN                 DEFAULT FALSE
 );
@@ -409,9 +404,9 @@ CREATE TABLE IF NOT EXISTS spellcasting
 (
     id                            UUID PRIMARY KEY                       DEFAULT uuid_generate_v4(),
     class_id                      UUID                          NOT NULL REFERENCES classes (id) ON DELETE CASCADE,
-    spellcasting_progression_enum spellcasting_progression_enum NOT NULL DEFAULT 'full_caster',
-    spellcasting_ability          ability_type_enum             NOT NULL DEFAULT 'intelligence',
-    preparation_formula           TEXT                                   DEFAULT 'prepared'
+    spellcasting_progression_enum spellcasting_progression_enum NOT NULL DEFAULT 'FULL_CASTER',
+    spellcasting_ability          ability_type_enum             NOT NULL DEFAULT 'INTELLIGENCE',
+    preparation_formula           TEXT                                   DEFAULT 'PREPARED'
 );
 
 CREATE TABLE IF NOT EXISTS proficiencies
@@ -461,7 +456,7 @@ CREATE TABLE IF NOT EXISTS skills
 (
     id                     UUID PRIMARY KEY REFERENCES content (id) ON DELETE CASCADE,
     skill_type_enum        skill_type_enum        NOT NULL,
-    proficiency_level_enum proficiency_level_enum NOT NULL DEFAULT 'not_proficient'
+    proficiency_level_enum proficiency_level_enum NOT NULL DEFAULT 'NOT_PROFICIENT'
 );
 
 CREATE TABLE IF NOT EXISTS creatures
@@ -572,7 +567,7 @@ CREATE TABLE IF NOT EXISTS senses
     id               UUID PRIMARY KEY REFERENCES content (id) ON DELETE CASCADE,
     senses_type_enum senses_type_enum NOT NULL,
     range_value      INTEGER          NOT NULL DEFAULT 0,     -- e.g., 60 for darkvision
-    range_unit_enum  range_unit_enum           DEFAULT 'feet' -- e.g., 'feet'
+    range_unit_enum  range_unit_enum           DEFAULT 'FEET' -- e.g., 'feet'
 );
 
 CREATE TABLE IF NOT EXISTS ability_score_improvements
@@ -586,8 +581,8 @@ CREATE TABLE IF NOT EXISTS movements
 (
     id                 UUID PRIMARY KEY REFERENCES content (id) ON DELETE CASCADE,
     max_movement_value INTEGER            NOT NULL DEFAULT 30,     -- e.g., 30 feet
-    max_movement_unit  range_unit_enum    NOT NULL DEFAULT 'feet', -- e.g., 'feet'
-    movement_type_enum movement_type_enum NOT NULL DEFAULT 'walking'
+    max_movement_unit  range_unit_enum    NOT NULL DEFAULT 'FEET', -- e.g., 'feet'
+    movement_type_enum movement_type_enum NOT NULL DEFAULT 'WALKING'
 );
 
 CREATE TABLE IF NOT EXISTS rooms
@@ -602,7 +597,7 @@ CREATE TABLE IF NOT EXISTS room_participants
     room_id   UUID      NOT NULL REFERENCES rooms (id) ON DELETE CASCADE,
     user_id   VARCHAR      NOT NULL REFERENCES users (id) ON DELETE CASCADE,
     PRIMARY KEY (room_id, user_id),
-    role_enum role_enum NOT NULL DEFAULT 'player'
+    role_enum role_enum NOT NULL DEFAULT 'PLAYER'
 );
 
 CREATE TABLE IF NOT EXISTS room_creatures
@@ -658,14 +653,12 @@ CREATE TABLE IF NOT EXISTS invocations
 (
     id                 UUID PRIMARY KEY REFERENCES creatures (id) ON DELETE CASCADE,
     duration_value     INTEGER            NOT NULL DEFAULT 0, -- e.g., 0 for permanent
-    duration_unit_enum duration_unit_enum NOT NULL DEFAULT 'permanent'
+    duration_unit_enum duration_unit_enum NOT NULL DEFAULT 'PERMANENT' -- e.g., 'permanent'
 );
 
 CREATE TABLE characters
 (
     id              UUID PRIMARY KEY REFERENCES creatures (id) ON DELETE CASCADE,
-    race            INTEGER,
-    character_class INTEGER,
     name            VARCHAR(255),
     alignment       INTEGER,
     age             VARCHAR(255),
@@ -681,4 +674,13 @@ CREATE TABLE characters
     faith           TEXT,
     eye_color       VARCHAR(100),
     gender          INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS chat_messages
+(
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    room_id UUID REFERENCES ROOMS (id) ON DELETE CASCADE,
+    sender VARCHAR REFERENCES USERS (id),
+    content TEXT NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );

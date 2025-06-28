@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/grant-option-items")
+@RequestMapping("api/grant-option-items")
 public class GrantOptionItemController {
 
     @Autowired

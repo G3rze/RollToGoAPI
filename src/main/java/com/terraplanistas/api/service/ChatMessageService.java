@@ -6,8 +6,11 @@ import com.terraplanistas.api.repository.ChatMessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
 
 @Service
 public class ChatMessageService {
@@ -36,7 +39,11 @@ public class ChatMessageService {
     }
 
     public List<ChatMessage> findByRoomId(UUID roomId) {
-        return chatMessageRepository.findByRoomId(roomId);
+
+        return chatMessageRepository.findAll().stream()
+                .filter(chatMessage -> chatMessage.getRoom().getId().equals(roomId))
+                .collect(Collectors.toList());
+
     }
 
 }

@@ -24,9 +24,6 @@ public class Subclass {
     @JoinColumn(name = "id")
     private Content content;
 
-    @Column(name = "class_id", nullable = false)
-    private UUID classId;
-
     @ManyToOne
     @JoinColumn(name = "class_id", referencedColumnName = "id")
     private Class clazz;

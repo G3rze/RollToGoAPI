@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/room-creature")
+@RequestMapping("api/room-creature")
 public class RoomCreatureController {
 
     @Autowired

@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/effects")
+@RequestMapping("api/effects")
 public class EffectController {
 
     @Autowired

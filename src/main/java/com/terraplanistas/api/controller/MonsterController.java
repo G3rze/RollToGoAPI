@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/monsters")
+@RequestMapping("api/monsters")
 public class MonsterController {
 
     @Autowired

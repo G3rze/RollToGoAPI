@@ -35,7 +35,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("El correo electrónico '" + userCreateDTO.getEmail() + "' ya está registrado.");
         }
         User user = new User();
-        user.setId(UUID.randomUUID().toString());
+        user.setId(userCreateDTO.getUID());
         user.setUserImageUrl(userCreateDTO.getUserImageUrl());
         user.setUsername(userCreateDTO.getUsername());
         user.setEmail(userCreateDTO.getEmail());

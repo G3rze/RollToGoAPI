@@ -17,15 +17,23 @@ public class ChatMessage {
     @Column(columnDefinition = "uuid", updatable = false, nullable = false)
     private UUID id;
 
-    @Column(name = "room_id", nullable = false)
-    private UUID roomId;
+    @ManyToOne()
+    @JoinColumn(name = "room_id", nullable = false)
+    private Room room;
 
-    @Column(name = "sender")
-    private String sender;
+    @ManyToOne
+    @JoinColumn(name = "sender", nullable = false)
+    private User sender;
 
     @Column(name = "content", nullable = false)
     private String content;
 
     @Column(name = "created_at", columnDefinition = "TIMESTAMP WITH TIME ZONE")
     private OffsetDateTime createdAt;
+
+    // Método auxiliar para obtener el roomId
+    @Transient
+    public UUID getRoomId() {
+        return room != null ? room.getId() : null;
+    }
 }

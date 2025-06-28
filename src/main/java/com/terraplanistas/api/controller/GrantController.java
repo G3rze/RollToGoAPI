@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/grants")
+@RequestMapping("api/grants")
 public class GrantController {
 
     @Autowired

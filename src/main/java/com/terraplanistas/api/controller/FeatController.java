@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/feats")
+@RequestMapping("api/feats")
 public class FeatController {
 
     @Autowired

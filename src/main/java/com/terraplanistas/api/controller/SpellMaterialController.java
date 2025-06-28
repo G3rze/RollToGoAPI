@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/spell-material")
+@RequestMapping("api/spell-material")
 public class SpellMaterialController {
 
     @Autowired

@@ -24,7 +24,7 @@ class RoomControllerIntegrationTest {
 
     @Test
     void whenValidInput_thenReturns200() throws Exception {
-        UUID contentId = UUID.fromString("fd3a7139-27ee-4f27-8e3b-86550c062a07");
+        String contentId = "fd3a7139-27ee-4f27-8e3b-86550c062a07";
         String requestJson = objectMapper.writeValueAsString(new RoomCreateDTO(
                 contentId, "Sala Test", "Descripción Test"));
 
@@ -36,7 +36,7 @@ class RoomControllerIntegrationTest {
 
     @Test
     void whenEmptyName_thenReturns400() throws Exception {
-        UUID contentId = UUID.randomUUID();
+        String contentId = "fd3a7139-27ee-4f27-8e3b-86550c062a07";
         String requestJson = objectMapper.writeValueAsString(new RoomCreateDTO(
                 contentId, "", "Descripción Test"));
 

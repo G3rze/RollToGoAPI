@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/species")
+@RequestMapping("api/species")
 public class SpeciesController {
 
     @Autowired

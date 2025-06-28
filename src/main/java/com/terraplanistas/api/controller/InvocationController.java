@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/invocations")
+@RequestMapping("api/invocations")
 public class InvocationController {
 
     @Autowired

@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/special-dice")
+@RequestMapping("api/special-dice")
 public class SpecialDieController {
 
     @Autowired
@@ -38,7 +38,7 @@ public class SpecialDieController {
     public ResponseEntity<?> save(@Valid @RequestBody SpecialDieCreateDTO specialDieCreateDTO) {
         Feature feature;
         try {
-            feature = featureService.findById(specialDieCreateDTO.getFeatureId());
+            feature = featureService.findById(UUID.fromString(specialDieCreateDTO.getFeatureId()));
 
             if (feature == null) {
                 return ResponseEntity.badRequest().body("La característica con ID " + specialDieCreateDTO.getFeatureId() + " no existe.");

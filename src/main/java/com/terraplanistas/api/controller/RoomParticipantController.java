@@ -18,7 +18,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/room-participants")
+@RequestMapping("api/room-participants")
 public class RoomParticipantController {
 
     @Autowired

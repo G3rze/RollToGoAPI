@@ -12,6 +12,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 public class UserCreateDTO {
+    private String UID;
+
     private String userImageUrl;
 
     @NotBlank(message = "El nombre de usuario no puede estar vacío")

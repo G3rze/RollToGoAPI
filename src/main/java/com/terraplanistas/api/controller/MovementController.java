@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/movements")
+@RequestMapping("api/movements")
 public class MovementController{
 
     @Autowired

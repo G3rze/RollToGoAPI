@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/bonus")
+@RequestMapping("api/bonus")
 public class BonusController {
 
     @Autowired

@@ -14,7 +14,7 @@ import java.util.UUID;
 @Setter
 public class ChatMessageCreateDTO {
     @NotNull(message = "El ID de la sala no puede ser nulo")
-    private UUID roomId;
+    private String roomId;
 
     private String sender;
 

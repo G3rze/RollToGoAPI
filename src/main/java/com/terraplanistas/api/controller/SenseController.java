@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/senses")
+@RequestMapping("api/senses")
 public class SenseController {
 
     @Autowired

@@ -22,12 +22,6 @@ public class Character {
     @JoinColumn(name = "id")
     private Creature creature;
 
-    @Column(name = "race")
-    private Integer race;
-
-    @Column(name = "character_class")
-    private Integer characterClass;
-
     @Column(name = "name")
     private String name;
 
@@ -72,4 +66,6 @@ public class Character {
 
     @Column(name = "gender")
     private Integer gender;
+
+
 }

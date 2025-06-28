@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/proficiencies")
+@RequestMapping("api/proficiencies")
 public class ProficiencyController {
 
     @Autowired

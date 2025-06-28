@@ -15,7 +15,7 @@ import java.util.UUID;
 @Setter
 public class SpecialDieCreateDTO {
     @NotNull(message = "El ID de la característica no puede ser nulo")
-    private UUID featureId;
+    private String featureId;
 
     @NotBlank(message = "El nombre no puede estar vacío")
     private String name;

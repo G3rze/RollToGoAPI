@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class User {
     @Id
-    @Column(columnDefinition = "uuid", updatable = false, nullable = false)
+    @Column(columnDefinition = "varchar(255)", updatable = false, nullable = false)
     private String id;
 
     @Column(name = "user_image_url")

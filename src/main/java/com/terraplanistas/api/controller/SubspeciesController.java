@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/subspecies")
+@RequestMapping("api/subspecies")
 public class SubspeciesController {
 
     @Autowired

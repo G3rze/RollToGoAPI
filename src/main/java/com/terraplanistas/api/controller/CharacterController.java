@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/characters")
+@RequestMapping("api/characters")
 public class CharacterController {
 
     @Autowired
@@ -45,13 +45,11 @@ public class CharacterController {
         Character character = new Character();
         character.setAge(characterCreateDTO.getAge());
         character.setName(characterCreateDTO.getName());
-        character.setCharacterClass(characterCreateDTO.getCharacterClass());
-        character.setAlignment(characterCreateDTO.getCharacterClass());
+        character.setAlignment(characterCreateDTO.getAlignment());
         characterCreateDTO.setAppearance(characterCreateDTO.getAppearance());
         character.setBiography(characterCreateDTO.getBiography());
         character.setEyeColor(characterCreateDTO.getEyeColor());
         character.setHairColor(characterCreateDTO.getHairColor());
-        character.setRace(characterCreateDTO.getRace());
         character.setFaith(characterCreateDTO.getFaith());
         character.setIdeals(characterCreateDTO.getIdeals());
         character.setPersonality(characterCreateDTO.getPersonality());
