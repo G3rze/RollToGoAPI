@@ -13,5 +13,7 @@ public enum DamageTypeEnum {
     PSYCHIC,
     RADIANT,
     SLASHING,
-    THUNDER
+    THUNDER,
+    HEALING,
+    TEMPORAL
 }
