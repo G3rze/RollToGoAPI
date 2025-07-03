@@ -2,6 +2,7 @@ package com.terraplanistas.api.controller.DTO;
 
 import com.terraplanistas.api.model.enums.CastingTimeUnitEnum;
 import com.terraplanistas.api.model.enums.DamageTypeEnum;
+import com.terraplanistas.api.model.enums.DurationUnitEnum;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -30,5 +31,5 @@ public class DamageCreateDTO {
 
     private Integer repeatTimeValue;
 
-    private CastingTimeUnitEnum repeatTimeUnit;
+    private DurationUnitEnum repeatTimeUnit;
 }

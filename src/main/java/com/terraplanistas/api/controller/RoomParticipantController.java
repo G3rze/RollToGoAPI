@@ -52,8 +52,7 @@ public class RoomParticipantController {
                 return ResponseEntity.badRequest().body("La sala con ID " + roomParticipantCreateDTO.getRoomId() + " no existe.");
             }
             room = roomOptional;
-            UUID userUuid = UUID.fromString(roomParticipantCreateDTO.getUserId());
-            User userOptional = userService.findById(userUuid.toString());
+            User userOptional = userService.findById(roomParticipantCreateDTO.getUserId());
             if (userOptional == null) {
                 return ResponseEntity.badRequest().body("El usuario con ID " + roomParticipantCreateDTO.getUserId() + " no existe.");
             }
