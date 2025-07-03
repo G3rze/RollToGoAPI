@@ -29,7 +29,7 @@ public class Class {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
     @Column(name = "hit_dice", nullable = false)
@@ -43,4 +43,7 @@ public class Class {
 
     @OneToMany(mappedBy = "clazz")
     private List<Spellcasting> spellcasting;
+
+    @OneToMany(mappedBy = "clazz")
+    private List<Subclass> subclasses;
 }

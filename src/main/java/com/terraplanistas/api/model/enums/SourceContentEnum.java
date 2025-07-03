@@ -13,6 +13,7 @@ public enum SourceContentEnum {
     SPELLS,
     SPECIES,
     SUBSPECIES,
+    FEATURES,
     FEATS,
     LIMITED_USAGES,
     EFFECTS,
@@ -21,5 +22,6 @@ public enum SourceContentEnum {
     SENSES,
     ABILITY_SCORE_IMPROVEMENT,
     MOVEMENTS,
-    ROOMS
+    ROOMS,
+    LEVEL_PROGRESSION
 }

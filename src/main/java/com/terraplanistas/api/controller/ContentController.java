@@ -44,8 +44,7 @@ public class ContentController {
     public ResponseEntity<?> save(@Valid @RequestBody ContentCreateDTO contentCreateDTO) {
         User author;
         try {
-            UUID authorUuid = UUID.fromString(contentCreateDTO.getAuthorId());
-            author = userService.findById(String.valueOf(authorUuid));
+            author = userService.findById(contentCreateDTO.getAuthorId());
 
             if (author == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)

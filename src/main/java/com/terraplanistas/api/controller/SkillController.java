@@ -1,8 +1,10 @@
 package com.terraplanistas.api.controller;
 
 import com.terraplanistas.api.controller.DTO.SkillCreateDTO;
+import com.terraplanistas.api.model.Ability;
 import com.terraplanistas.api.model.Content;
 import com.terraplanistas.api.model.Skill;
+import com.terraplanistas.api.service.AbilityService;
 import com.terraplanistas.api.service.ContentService;
 import com.terraplanistas.api.service.SkillService;
 import jakarta.validation.Valid;
@@ -33,17 +35,17 @@ public class SkillController {
     }
 
     @Autowired
-    private ContentService contentService;
+    private AbilityService abilityService;
 
     @PostMapping
     public ResponseEntity<?> save(@Valid @RequestBody SkillCreateDTO skillCreateDTO) {
-        Content content;
+        Ability ability;
         try {
-            UUID contentUuid = UUID.fromString(skillCreateDTO.getContentId());
-            content = contentService.findById(contentUuid);
+            UUID contentUuid = UUID.fromString(skillCreateDTO.getAbilityId());
+            ability = abilityService.findById(contentUuid);
 
-            if (content == null) {
-                return ResponseEntity.badRequest().body("El contenido con ID " + skillCreateDTO.getContentId() + " no existe.");
+            if (ability == null) {
+                return ResponseEntity.badRequest().body("La habilidad con ID " + skillCreateDTO.getAbilityId() + " no existe.");
             }
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body("El ID de contenido proporcionado no es un formato UUID válido: " + e.getMessage());
@@ -52,7 +54,7 @@ public class SkillController {
         }
 
         Skill skill = new Skill();
-        skill.setContent(content);
+        skill.setAbility(ability);
         skill.setSkillTypeEnum(skillCreateDTO.getSkillTypeEnum());
         skill.setProficiencyLevelEnum(skillCreateDTO.getProficiencyLevelEnum());
 

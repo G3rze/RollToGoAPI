@@ -1,5 +1,6 @@
 package com.terraplanistas.api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,13 +25,15 @@ public class Subclass {
     @JoinColumn(name = "id")
     private Content content;
 
+
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "class_id", referencedColumnName = "id")
     private Class clazz;
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 }

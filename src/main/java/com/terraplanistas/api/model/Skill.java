@@ -30,6 +30,12 @@ public class Skill {
     @Enumerated(EnumType.STRING)
     private SkillTypeEnum skillTypeEnum;
 
+    @ManyToOne
+    @MapsId
+    @JoinColumn(name = "ability_id")
+    private Ability ability;
+
+
     @Column(name = "proficiency_level_enum", nullable = false)
     @Enumerated(EnumType.STRING)
     private ProficiencyLevelEnum proficiencyLevelEnum;

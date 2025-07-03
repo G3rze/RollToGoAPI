@@ -53,6 +53,7 @@ public class Content {
     private List<GrantOptionSet> grantOptionSets;
 
     @OneToMany(mappedBy = "grantedContent")
+    @JsonIgnore
     private List<GrantOptionItem> grantOptionItems;
 
 }

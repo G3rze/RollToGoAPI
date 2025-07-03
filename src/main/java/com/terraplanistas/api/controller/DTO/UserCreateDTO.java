@@ -12,7 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 public class UserCreateDTO {
-    private String UID;
+    private String uid;
 
     private String userImageUrl;
 

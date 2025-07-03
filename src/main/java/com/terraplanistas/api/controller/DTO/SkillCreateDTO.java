@@ -16,8 +16,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @Setter
 public class SkillCreateDTO {
-    @NotBlank(message = "El ID de contenido no puede estar vacío")
-    private String contentId;
+    @NotBlank(message = "El ID de la habilidad no puede estar vacío")
+    private String abilityId;
 
     @NotNull(message = "El tipo de habilidad no puede ser nulo")
     private SkillTypeEnum skillTypeEnum;

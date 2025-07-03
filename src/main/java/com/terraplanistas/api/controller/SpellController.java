@@ -22,7 +22,6 @@ public class SpellController {
 
     @Autowired
     private SpellService spellService;
-    private ContentService contentService;
 
     @GetMapping
     public List<Spell> getAllSpells() {
@@ -43,6 +42,9 @@ public class SpellController {
     public void deleteSpell(@PathVariable UUID id) {
         spellService.deleteById(id);
     }
+
+    @Autowired
+    private ContentService contentService;
 
     @PostMapping
     public ResponseEntity<?> save(@Valid @RequestBody SpellCreateDTO spellCreateDTO) {

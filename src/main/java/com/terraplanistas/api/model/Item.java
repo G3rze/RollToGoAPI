@@ -31,7 +31,7 @@ public class Item {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
     @Column(name = "item_type_enum", nullable = false)

@@ -3,6 +3,7 @@ package com.terraplanistas.api.controller;
 import com.terraplanistas.api.controller.DTO.AbilityCreateDTO;
 import com.terraplanistas.api.model.Ability;
 import com.terraplanistas.api.service.AbilityService;
+import com.terraplanistas.api.service.ContentService;
 import jakarta.validation.Valid;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class AbilityController {
         return abilityService.findById(id);
     }
 
+    @Autowired
+    private ContentService contentService;
+
     @PostMapping
     public ResponseEntity<?> createAbility(@Valid @RequestBody AbilityCreateDTO abilityDTO){
         if (abilityDTO.getContentId() == null) {
@@ -36,6 +40,7 @@ public class AbilityController {
         }
 
         Ability ability = new Ability();
+        ability.setContent(contentService.findById(abilityDTO.getContentId()));
         ability.setAbilityTypeEnum(abilityDTO.getAbilityTypeEnum());
         ability.setModifier(abilityDTO.getModifier());
         ability.setValue(abilityDTO.getValue());

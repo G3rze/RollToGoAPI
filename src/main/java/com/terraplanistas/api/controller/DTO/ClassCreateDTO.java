@@ -13,6 +13,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
+
 public class ClassCreateDTO {
     @NotBlank(message = "El ID de contenido no puede estar vacío")
     private String contentId;

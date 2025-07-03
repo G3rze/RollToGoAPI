@@ -1,5 +1,6 @@
 package com.terraplanistas.api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.terraplanistas.api.model.enums.CreatureSizeEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -26,13 +27,14 @@ public class Subspecies {
     private Content content;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "species_id", nullable = false)
     private Species species;
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
     @Column(name = "languages")

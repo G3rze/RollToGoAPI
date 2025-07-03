@@ -1,5 +1,6 @@
 package com.terraplanistas.api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.terraplanistas.api.model.enums.SourceContentEnum;
 import jakarta.persistence.*;
 import lombok.*;
@@ -23,6 +24,7 @@ public class Grant {
     private SourceContentEnum granterType;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "granter_content_id", nullable = false)
     private Content granterContent;
 
@@ -32,5 +34,6 @@ public class Grant {
 
     @ManyToOne
     @JoinColumn(name = "granted_content_id", nullable = false)
+    @JsonIgnore
     private Content grantedContent;
 }
