@@ -1,28 +1,30 @@
 package com.terraplanistas.api.model;
 
-import lombok.*;
+import com.terraplanistas.api.model.compound_ids.RoomParticipantId;
+import com.terraplanistas.api.model.enums.RoleEnum;
+import jakarta.persistence.Entity;
 import jakarta.persistence.*;
-import java.util.UUID;
+import lombok.*;
 
 @Entity
 @Table(name = "room_participants")
-@Data
+@IdClass(RoomParticipantId.class)
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class RoomParticipant {
     @Id
-    @GeneratedValue
-    private UUID id;
-
-    @ManyToOne
-    @JoinColumn(name = "room_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "room_id", referencedColumnName = "id")
     private Room room;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @Id
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    @Column(nullable = false, length = 20)
-    private String role;
+    @Column(name = "role_enum", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private RoleEnum roleEnum;
 }

@@ -1,31 +1,38 @@
 package com.terraplanistas.api.model;
 
-import lombok.*;
+import jakarta.persistence.Entity;
 import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "room")
-@Data
+@Table(name = "rooms")
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Room {
+
     @Id
-    @GeneratedValue
+    @Column(columnDefinition = "uuid", updatable = false, nullable = false)
     private UUID id;
 
-    @ManyToOne
-    @JoinColumn(name = "owner_id", nullable = false)
-    private User owner;
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "id")
+    private Content content;
 
-    @ManyToOne
-    @JoinColumn(name = "current_dm_id", nullable = false)
-    private User currentDm;
+    @Version
+    private Long version;
 
-    @Column(name = "scene_state", columnDefinition = "jsonb", nullable = false)
-    private String sceneState;
+    @Column(name = "name", nullable = false)
+    private String name;
 
-    @Column(nullable = false)
-    private boolean visibility = false;
+    @Column(name = "description", columnDefinition = "TEXT")
+    private String description;
+
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RoomParticipant> roomParticipants;
 }

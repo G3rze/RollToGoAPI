@@ -4,7 +4,8 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-.env
+src/main/.env
+rolltogo.sql
 
 ### STS ###
 .apt_generated
@@ -33,3 +34,4 @@ build/
 
 ### VS Code ###
 .vscode/
+/rolltogo-cc8e1-firebase-adminsdk-fbsvc-f53c0d2f24.json

@@ -1,17 +1,21 @@
 package com.terraplanistas.api.controller;
 
+import com.terraplanistas.api.controller.DTO.UserCreateDTO;
 import com.terraplanistas.api.model.User;
+import com.terraplanistas.api.notation.OwnerCheck.OwnerCheck;
 import com.terraplanistas.api.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("api/user")
 public class UserController {
 
     @Autowired
@@ -22,27 +26,42 @@ public class UserController {
         return userService.findAll();
     }
 
-    @GetMapping("/{id}")
-    public User getUserById(@PathVariable UUID id) {
-        return userService.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found with id: " + id));
-    }
-
     @PostMapping
-    public User createUser(@RequestBody User User) {
-        return userService.save(User);
-    }
-
-    @PutMapping("/{id}")
-    public User updateUser(@PathVariable UUID id, @RequestBody User user) {
-        if (userService.findById(id).isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found with id: " + id);
+    public ResponseEntity<?> save(@Valid @RequestBody UserCreateDTO userCreateDTO) {
+        if (userService.findByUsername(userCreateDTO.getUsername()).isPresent()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("El nombre de usuario '" + userCreateDTO.getUsername() + "' ya está en uso.");
         }
-        return userService.save(user);
+        if (userService.findByEmail(userCreateDTO.getEmail()).isPresent()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("El correo electrónico '" + userCreateDTO.getEmail() + "' ya está registrado.");
+        }
+        User user = new User();
+        user.setId(userCreateDTO.getUid());
+        user.setUserImageUrl(userCreateDTO.getUserImageUrl());
+        user.setUsername(userCreateDTO.getUsername());
+        user.setEmail(userCreateDTO.getEmail());
+        user.setCreatedAt(OffsetDateTime.now());
+
+        try {
+            User savedUser = userService.save(user);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Error al guardar el usuario: " + e.getMessage());
+        }
+    }
+    @PutMapping
+    public User updateUser(@RequestBody User User) {
+        return userService.update(User);
     }
 
-    @DeleteMapping
-    public void deleteUser(@RequestBody UUID id) {
+    @OwnerCheck
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable String id) {
         userService.deleteById(id);
     }
+
+    @GetMapping("/{id}")
+    public User getUserById(@PathVariable String id) {
+        return userService.findById(id);
+    }
+
 }
