@@ -2,6 +2,7 @@ package com.terraplanistas.api.model;
 
 import com.terraplanistas.api.model.enums.CastingTimeUnitEnum;
 import com.terraplanistas.api.model.enums.DamageTypeEnum;
+import com.terraplanistas.api.model.enums.DurationUnitEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -41,5 +42,5 @@ public class Damage {
 
     @Column(name = "repeat_time_unit")
     @Enumerated(EnumType.STRING)
-    private CastingTimeUnitEnum repeatTimeUnit;
+    private DurationUnitEnum repeatTimeUnit;
 }

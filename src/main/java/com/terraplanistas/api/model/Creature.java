@@ -1,5 +1,6 @@
 package com.terraplanistas.api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.terraplanistas.api.model.enums.AlignmentEnum;
 import com.terraplanistas.api.model.enums.CreatureSizeEnum;
 import com.terraplanistas.api.model.enums.CreatureSourceType;
@@ -55,11 +56,14 @@ public class Creature {
     private CreatureSourceType creatureSourceType;
 
     @OneToOne(mappedBy = "creature", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private Monster monsters;
 
     @OneToOne(mappedBy = "creature", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private Invocation invocations;
 
     @OneToOne(mappedBy = "creature", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JsonIgnore
     private Character character;
 }
