@@ -30,7 +30,7 @@ public class ChatMessageController {
     @Autowired
     UserService userService;
 
-    @MessageMapping("/chat.sendM+essage")
+    @MessageMapping("/chat.sendMessage")
     public void sendMessage(@RequestBody ChatMessageCreateDTO dto) {
         System.out.println("📨 Mensaje recibido: " + dto);
 
