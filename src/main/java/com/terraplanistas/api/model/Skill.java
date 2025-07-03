@@ -18,13 +18,10 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Skill {
     @Id
+    @GeneratedValue
     @Column(columnDefinition = "uuid", updatable = false, nullable = false)
     private UUID id;
 
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "id")
-    private Content content;
 
     @Column(name = "skill_type_enum", nullable = false)
     @Enumerated(EnumType.STRING)
