@@ -1,12 +1,11 @@
 package com.terraplanistas.api.controller;
 
-import com.terraplanistas.api.controller.DTO.CreatureCreateDTO;
+import com.terraplanistas.api.controller.requestDTO.CreatureCreateDTO;
 import com.terraplanistas.api.model.Content;
 import com.terraplanistas.api.model.Creature;
 import com.terraplanistas.api.service.ContentService;
 import com.terraplanistas.api.service.CreatureService;
 import jakarta.validation.Valid;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

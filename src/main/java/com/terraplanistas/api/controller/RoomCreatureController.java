@@ -1,6 +1,6 @@
 package com.terraplanistas.api.controller;
 
-import com.terraplanistas.api.controller.DTO.RoomCreatureCreateDTO;
+import com.terraplanistas.api.controller.requestDTO.RoomCreatureCreateDTO;
 import com.terraplanistas.api.model.Creature;
 import com.terraplanistas.api.model.Room;
 import com.terraplanistas.api.model.RoomCreature;

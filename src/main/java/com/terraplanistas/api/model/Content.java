@@ -1,6 +1,7 @@
 package com.terraplanistas.api.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.terraplanistas.api.model.enums.SourceContentEnum;
 import com.terraplanistas.api.model.enums.VisibilityEnum;
 
@@ -39,7 +40,7 @@ public class Content {
     private OffsetDateTime createdAt;
 
     @ManyToOne
-    @JsonIgnore
+    @JsonIgnoreProperties("contents")
     @JoinColumn(name = "author_id")
     private User author;
 

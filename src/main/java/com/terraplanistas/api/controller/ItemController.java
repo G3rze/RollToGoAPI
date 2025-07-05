@@ -1,6 +1,6 @@
 package com.terraplanistas.api.controller;
 
-import com.terraplanistas.api.controller.DTO.ItemCreateDTO;
+import com.terraplanistas.api.controller.requestDTO.ItemCreateDTO;
 import com.terraplanistas.api.model.Content;
 import com.terraplanistas.api.model.Item;
 import com.terraplanistas.api.repository.ItemRepository;

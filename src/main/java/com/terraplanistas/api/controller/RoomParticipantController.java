@@ -1,6 +1,6 @@
 package com.terraplanistas.api.controller;
 
-import com.terraplanistas.api.controller.DTO.RoomParticipantCreateDTO;
+import com.terraplanistas.api.controller.requestDTO.RoomParticipantCreateDTO;
 import com.terraplanistas.api.model.Room;
 import com.terraplanistas.api.model.RoomParticipant;
 import com.terraplanistas.api.model.User;

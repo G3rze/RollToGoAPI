@@ -1,6 +1,6 @@
 package com.terraplanistas.api.controller;
 
-import com.terraplanistas.api.controller.DTO.LimitedUsageCreateDTO;
+import com.terraplanistas.api.controller.requestDTO.LimitedUsageCreateDTO;
 import com.terraplanistas.api.model.Content;
 import com.terraplanistas.api.model.LimitedUsage;
 import com.terraplanistas.api.service.ContentService;

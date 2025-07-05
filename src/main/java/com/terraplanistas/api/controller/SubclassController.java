@@ -1,12 +1,11 @@
 package com.terraplanistas.api.controller;
 
-import com.terraplanistas.api.controller.DTO.SubclassCreateDTO;
+import com.terraplanistas.api.controller.requestDTO.SubclassCreateDTO;
 import com.terraplanistas.api.model.Class;
 import com.terraplanistas.api.model.Content;
 import com.terraplanistas.api.model.Subclass;
 import com.terraplanistas.api.service.ClassService;
 import com.terraplanistas.api.service.ContentService;
-import com.terraplanistas.api.service.RoomService;
 import com.terraplanistas.api.service.SubclassService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

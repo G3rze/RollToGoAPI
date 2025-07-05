@@ -1,6 +1,6 @@
 package com.terraplanistas.api.controller;
 
-import com.terraplanistas.api.controller.DTO.BackgroundCreateDTO;
+import com.terraplanistas.api.controller.requestDTO.BackgroundCreateDTO;
 import com.terraplanistas.api.model.Background;
 import com.terraplanistas.api.model.Content;
 import com.terraplanistas.api.service.BackgroundService;

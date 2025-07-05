@@ -1,11 +1,10 @@
 package com.terraplanistas.api.controller;
 
-import com.terraplanistas.api.controller.DTO.AbilityCreateDTO;
+import com.terraplanistas.api.controller.requestDTO.AbilityCreateDTO;
 import com.terraplanistas.api.model.Ability;
 import com.terraplanistas.api.service.AbilityService;
 import com.terraplanistas.api.service.ContentService;
 import jakarta.validation.Valid;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

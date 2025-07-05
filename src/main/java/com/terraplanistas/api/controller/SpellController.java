@@ -1,9 +1,7 @@
 package com.terraplanistas.api.controller;
 
-import com.terraplanistas.api.controller.DTO.SpeciesCreateDTO;
-import com.terraplanistas.api.controller.DTO.SpellCreateDTO;
+import com.terraplanistas.api.controller.requestDTO.SpellCreateDTO;
 import com.terraplanistas.api.model.Content;
-import com.terraplanistas.api.model.Species;
 import com.terraplanistas.api.model.Spell;
 import com.terraplanistas.api.service.ContentService;
 import com.terraplanistas.api.service.SpellService;

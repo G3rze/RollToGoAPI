@@ -1,9 +1,8 @@
 package com.terraplanistas.api.controller;
 
-import com.terraplanistas.api.controller.DTO.DamageCreateDTO;
+import com.terraplanistas.api.controller.requestDTO.DamageCreateDTO;
 import com.terraplanistas.api.model.Content;
 import com.terraplanistas.api.model.Damage;
-import com.terraplanistas.api.repository.DamageRepository;
 import com.terraplanistas.api.service.ContentService;
 import com.terraplanistas.api.service.DamageService;
 import jakarta.validation.Valid;
