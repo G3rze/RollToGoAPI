@@ -1,9 +1,8 @@
 package com.terraplanistas.api.controller;
 
-import com.terraplanistas.api.controller.DTO.RoomCreateDTO;
+import com.terraplanistas.api.controller.requestDTO.RoomCreateDTO;
 import com.terraplanistas.api.model.Content;
 import com.terraplanistas.api.model.Room;
-import com.terraplanistas.api.repository.ContentRepository;
 import com.terraplanistas.api.service.ContentService;
 import com.terraplanistas.api.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;

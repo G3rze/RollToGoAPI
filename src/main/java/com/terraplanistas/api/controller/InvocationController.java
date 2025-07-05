@@ -1,6 +1,6 @@
 package com.terraplanistas.api.controller;
 
-import com.terraplanistas.api.controller.DTO.InvocationCreateDTO;
+import com.terraplanistas.api.controller.requestDTO.InvocationCreateDTO;
 import com.terraplanistas.api.model.Creature;
 import com.terraplanistas.api.model.Invocation;
 import com.terraplanistas.api.service.CreatureService;

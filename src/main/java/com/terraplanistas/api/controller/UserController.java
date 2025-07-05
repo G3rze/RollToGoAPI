@@ -1,6 +1,6 @@
 package com.terraplanistas.api.controller;
 
-import com.terraplanistas.api.controller.DTO.UserCreateDTO;
+import com.terraplanistas.api.controller.requestDTO.UserCreateDTO;
 import com.terraplanistas.api.model.User;
 import com.terraplanistas.api.notation.OwnerCheck.OwnerCheck;
 import com.terraplanistas.api.service.UserService;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("api/user")

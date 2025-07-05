@@ -1,11 +1,10 @@
 package com.terraplanistas.api.controller;
 
-import com.terraplanistas.api.controller.DTO.AbilityScoreImprovementCreateDTO;
+import com.terraplanistas.api.controller.requestDTO.AbilityScoreImprovementCreateDTO;
 import com.terraplanistas.api.model.AbilityScoreImprovement;
 import com.terraplanistas.api.model.Content;
 import com.terraplanistas.api.service.AbilityScoreImprovementService;
 import com.terraplanistas.api.service.ContentService;
-import com.terraplanistas.api.service.CreatureService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

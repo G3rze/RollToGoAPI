@@ -1,17 +1,14 @@
 package com.terraplanistas.api.controller;
 
-import com.terraplanistas.api.controller.DTO.SkillCreateDTO;
+import com.terraplanistas.api.controller.requestDTO.SkillCreateDTO;
 import com.terraplanistas.api.model.Ability;
-import com.terraplanistas.api.model.Content;
 import com.terraplanistas.api.model.Skill;
 import com.terraplanistas.api.service.AbilityService;
-import com.terraplanistas.api.service.ContentService;
 import com.terraplanistas.api.service.SkillService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

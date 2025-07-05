@@ -1,7 +1,6 @@
 package com.terraplanistas.api.controller;
 
-import com.terraplanistas.api.controller.DTO.AbilityCreateDTO;
-import com.terraplanistas.api.controller.DTO.CharacterCreateDTO;
+import com.terraplanistas.api.controller.requestDTO.CharacterCreateDTO;
 import com.terraplanistas.api.model.Creature;
 import com.terraplanistas.api.service.CharacterService;
 import com.terraplanistas.api.model.Character;

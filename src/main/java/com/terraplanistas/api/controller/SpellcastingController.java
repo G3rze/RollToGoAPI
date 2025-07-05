@@ -1,6 +1,6 @@
 package com.terraplanistas.api.controller;
 
-import com.terraplanistas.api.controller.DTO.SpellcastingCreateDTO;
+import com.terraplanistas.api.controller.requestDTO.SpellcastingCreateDTO;
 import com.terraplanistas.api.model.Class;
 import com.terraplanistas.api.model.Spellcasting;
 import com.terraplanistas.api.service.ClassService;

@@ -1,6 +1,6 @@
 package com.terraplanistas.api.controller;
 
-import com.terraplanistas.api.controller.DTO.MovementCreateDTO;
+import com.terraplanistas.api.controller.requestDTO.MovementCreateDTO;
 import com.terraplanistas.api.model.Content;
 import com.terraplanistas.api.model.Movement;
 import com.terraplanistas.api.service.ContentService;

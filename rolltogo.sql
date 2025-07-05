@@ -1,7 +1,7 @@
 -- auto-generated definition
 -- we don't know how to generate root <with-no-name> (class Root) :(
 
-CREATE USER rollmaster WITH PASSWORD 'M3be$0(onM4r(o';
+CREATE USER rollmaster WITH PASSWORD 'PassExample';
 
 DROP DATABASE rolltogo;
 
@@ -32,6 +32,7 @@ CREATE TYPE source_content_enum AS ENUM (
     'SPELLS',
     'SPECIES',
     'SUBSPECIES',
+    'FEATURES'
     'FEATS',
     'LIMITED_USAGES',
     'EFFECTS',
@@ -40,7 +41,8 @@ CREATE TYPE source_content_enum AS ENUM (
     'SENSES',
     'ABILITY_SCORE_IMPROVEMENT',
     'MOVEMENTS',
-    'ROOMS'
+    'ROOMS',
+    'LEVEL_PROGRESSION'
 );
 
 CREATE TYPE visibility_enum AS ENUM (
@@ -302,7 +304,9 @@ CREATE TYPE damage_type_enum AS ENUM (
     'PSYCHIC',
     'RADIANT',
     'SLASHING',
-    'THUNDER'
+    'THUNDER',
+    'HEALING',
+    'TEMPORAL'
 );
 
 CREATE TYPE senses_type_enum AS ENUM (
@@ -454,7 +458,8 @@ CREATE TABLE IF NOT EXISTS abilities
 
 CREATE TABLE IF NOT EXISTS skills
 (
-    id                     UUID PRIMARY KEY REFERENCES content (id) ON DELETE CASCADE,
+    id                     UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    ability_id             UUID REFERENCES abilities (id) ON DELETE CASCADE NOT NULL,
     skill_type_enum        skill_type_enum        NOT NULL,
     proficiency_level_enum proficiency_level_enum NOT NULL DEFAULT 'NOT_PROFICIENT'
 );
