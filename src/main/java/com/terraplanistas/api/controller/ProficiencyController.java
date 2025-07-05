@@ -1,6 +1,6 @@
 package com.terraplanistas.api.controller;
 
-import com.terraplanistas.api.controller.DTO.ProficiencyCreateDTO;
+import com.terraplanistas.api.controller.requestDTO.ProficiencyCreateDTO;
 import com.terraplanistas.api.model.Content;
 import com.terraplanistas.api.model.Proficiency;
 import com.terraplanistas.api.service.ContentService;

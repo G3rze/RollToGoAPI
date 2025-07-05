@@ -1,6 +1,6 @@
 package com.terraplanistas.api.controller;
 
-import com.terraplanistas.api.controller.DTO.SpellMaterialCreateDTO;
+import com.terraplanistas.api.controller.requestDTO.SpellMaterialCreateDTO;
 import com.terraplanistas.api.model.Item;
 import com.terraplanistas.api.model.Spell;
 import com.terraplanistas.api.model.SpellMaterial;

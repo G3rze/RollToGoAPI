@@ -1,6 +1,6 @@
 package com.terraplanistas.api.controller;
 
-import com.terraplanistas.api.controller.DTO.BonusCreateDTO;
+import com.terraplanistas.api.controller.requestDTO.BonusCreateDTO;
 import com.terraplanistas.api.model.Bonus;
 import com.terraplanistas.api.model.Content;
 import com.terraplanistas.api.service.BonusService;

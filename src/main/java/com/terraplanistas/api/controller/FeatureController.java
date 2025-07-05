@@ -1,6 +1,6 @@
 package com.terraplanistas.api.controller;
 
-import com.terraplanistas.api.controller.DTO.FeatureCreateDTO;
+import com.terraplanistas.api.controller.requestDTO.FeatureCreateDTO;
 import com.terraplanistas.api.model.Content;
 import com.terraplanistas.api.model.Feature;
 import com.terraplanistas.api.service.ContentService;

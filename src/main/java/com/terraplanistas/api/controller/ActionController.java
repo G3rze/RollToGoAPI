@@ -1,9 +1,8 @@
 package com.terraplanistas.api.controller;
 
-import com.terraplanistas.api.controller.DTO.ActionCreateDTO;
+import com.terraplanistas.api.controller.requestDTO.ActionCreateDTO;
 import com.terraplanistas.api.model.Action;
 import com.terraplanistas.api.model.Content;
-import com.terraplanistas.api.repository.ActionRepository;
 import com.terraplanistas.api.service.ActionService;
 import com.terraplanistas.api.service.ContentService;
 import jakarta.validation.Valid;

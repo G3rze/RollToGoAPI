@@ -1,6 +1,6 @@
 package com.terraplanistas.api.controller;
 
-import com.terraplanistas.api.controller.DTO.SpecialDieCreateDTO;
+import com.terraplanistas.api.controller.requestDTO.SpecialDieCreateDTO;
 import com.terraplanistas.api.model.Feature;
 import com.terraplanistas.api.model.SpecialDie;
 import com.terraplanistas.api.service.FeatureService;

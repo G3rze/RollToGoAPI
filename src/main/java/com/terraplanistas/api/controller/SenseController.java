@@ -1,6 +1,6 @@
 package com.terraplanistas.api.controller;
 
-import com.terraplanistas.api.controller.DTO.SenseCreateDTO;
+import com.terraplanistas.api.controller.requestDTO.SenseCreateDTO;
 import com.terraplanistas.api.model.Content;
 import com.terraplanistas.api.model.Sense;
 import com.terraplanistas.api.service.ContentService;

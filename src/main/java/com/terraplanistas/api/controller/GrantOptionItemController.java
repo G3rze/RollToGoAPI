@@ -1,6 +1,6 @@
 package com.terraplanistas.api.controller;
 
-import com.terraplanistas.api.controller.DTO.GrantOptionItemCreateDTO;
+import com.terraplanistas.api.controller.requestDTO.GrantOptionItemCreateDTO;
 import com.terraplanistas.api.model.Content;
 import com.terraplanistas.api.model.GrantOptionItem;
 import com.terraplanistas.api.model.GrantOptionSet;

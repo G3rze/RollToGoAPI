@@ -1,6 +1,6 @@
 package com.terraplanistas.api.controller;
 
-import com.terraplanistas.api.controller.DTO.EffectCreateDTO;
+import com.terraplanistas.api.controller.requestDTO.EffectCreateDTO;
 import com.terraplanistas.api.model.Content;
 import com.terraplanistas.api.model.Effect;
 import com.terraplanistas.api.service.ContentService;
